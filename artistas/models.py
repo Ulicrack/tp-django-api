@@ -13,3 +13,20 @@ class Artista(models.Model):
 
     def __str__(self):
         return self.nombre_artistico
+
+
+class Evento(models.Model):
+    nombre = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=50)
+    fecha = models.DateField()
+    lugar = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    activo = models.BooleanField(default=True)
+    artista = models.ForeignKey(
+        Artista,
+        on_delete=models.CASCADE,
+        related_name="eventos"
+    )
+
+    def __str__(self):
+        return self.nombre
